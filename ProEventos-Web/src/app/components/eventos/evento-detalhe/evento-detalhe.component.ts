@@ -17,7 +17,7 @@ import { EventoService } from '@app/services/evento.service';
 import { Evento } from '@app/models/Evento';
 import { Lote } from '@app/models/Lote';
 import { DatePipe } from '@angular/common';
-// import { environment } from '@environments/environment';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -95,7 +95,7 @@ export class EventoDetalheComponent implements OnInit {
             this.evento = { ...evento };
             this.form.patchValue(this.evento);
             if (this.evento.imagemURL !== '') {
-              // this.imagemURL = environment.apiURL + 'resources/images/' + this.evento.imagemURL;
+              this.imagemURL = environment.apiURL + 'resources/images/' + this.evento.imagemURL;
             }
             this.carregarLotes();
           },

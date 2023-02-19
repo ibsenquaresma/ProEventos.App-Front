@@ -129,7 +129,7 @@
                   <label>Preço</label>
                   <input type="text"
                   currencyMask
-                  [options]="{ prefix: 'R$ ', thousands:'.', decimal: ','}"
+                  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
                   class="form-control"
                   [ngClass]="cssValidator(lotes.get(i+'.preco'))"
                   formControlName="preco"
@@ -139,7 +139,6 @@
                   <label>Data Início</label>
                   <input type="datetime" class="form-control"
                   bsDatepicker
-                  [bsConfig]="bsConfigLote"
                   value="{{lotes.get(i+'.dataInicio').value | date:'dd/MM/yyyy'}}"
                   placeholder="01/01/2019"
                   (bsValueChange)="mudarValorData($event, i, 'dataInicio')">
@@ -148,7 +147,6 @@
                   <label>Data Fim</label>
                   <input type="datetime" class="form-control"
                   bsDatepicker
-                  [bsConfig]="bsConfigLote"
                   value="{{lotes.get(i+'.dataFim').value | date:'dd/MM/yyyy'}}"
                   placeholder="01/01/2019"
                   (bsValueChange)="mudarValorData($event, i, 'dataFim')">
