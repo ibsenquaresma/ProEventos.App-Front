@@ -11,7 +11,7 @@ export class TituloComponent implements OnInit {
   // @Input() titulo : string;
   @Input() titulo = {} as string;
   @Input()iconClass = 'fa fa-user';
-  @Input()subtitulo = 'Desde 2021';
+  @Input()subtitulo = 'Desde 2023';
   @Input() botaoListar = false;
 
 
