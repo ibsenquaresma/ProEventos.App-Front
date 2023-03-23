@@ -1,6 +1,10 @@
+import { ValidatorField } from './../../../helpers/ValidatorField';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { ValidatorField } from '@app/helpers/ValidatorField';
+import { User } from '../../../models/identity/User';
+import { AccountService } from '../../../services/account.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registration',
@@ -9,9 +13,13 @@ import { ValidatorField } from '@app/helpers/ValidatorField';
 })
 export class RegistrationComponent implements OnInit {
 
+  user = {} as User;
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private accountService: AccountService,
+              private router: Router,
+              private toaster: ToastrService) { }
 
   get f(): any { return this.form.controls; }
 
@@ -26,8 +34,8 @@ export class RegistrationComponent implements OnInit {
     };
 
     this.form = this.fb.group({
-      primeiroNome: ['', Validators.required],
-      ultimoNome: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['',
         [Validators.required, Validators.email]
       ],
@@ -37,6 +45,14 @@ export class RegistrationComponent implements OnInit {
       ],
       confirmePassword: ['', Validators.required],
     }, formOptions);
+  }
+
+  register(): void {
+    this.user = { ...this.form.value };
+    this.accountService.register(this.user).subscribe(
+      () => this.router.navigateByUrl('/dashboard'),
+      (error: any) => this.toaster.error(error.error)
+    )
   }
 
 }
